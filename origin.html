@@ -12,10 +12,27 @@
       }
 
       body {
+        position: relative;
+        min-height: 100vh;
+      }
+
+      body::after {
+        content: "";
+        background: url("https://img.tukuppt.com/ad_preview/01/15/74/61a814f1c1939.jpg!/fw/780")
+          center/cover no-repeat fixed;
+        opacity: 0.3; /* 可按需调整透明度 */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* 确保背景在内容下方 */
+      }
+
+      body {
         font-family: "Segoe UI", "微软雅黑", sans-serif;
         margin: 0;
         padding: 0;
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         color: var(--text-color);
       }
 
@@ -195,9 +212,16 @@
 
         <article>
           <p>
-            最早见于战国末<span class="highlight">《易传·系辞上》</span>
+            最早见于战国末<a href="http://www.guoxue.com/book/zhouyi/0003.htm"
+              >《易传·系辞上》</a
+            >
+
             ，提出
-            <q>《易》有太极，是生两仪</q>，为解释世界本原的哲学范畴。
+            <q>
+              <a href="https://baike.baidu.com/item/%E6%98%93%E7%BB%8F/153636"
+                >《易》</a
+              >有太极，是生两仪</q
+            >，为解释世界本原的哲学范畴。
           </p>
 
           <h3>历史沿革</h3>
@@ -208,7 +232,11 @@
 
           <h3>理论发展</h3>
           <p>
-            宋明时期：理学家（如<span class="highlight">朱熹</span>
+            宋明时期：理学家（如<span class="highlight"
+              ><a href="https://baike.baidu.com/item/%E6%9C%B1%E7%86%B9/106669"
+                >朱熹
+              </a></span
+            >
             ）以
             <q>理</q>释太极，亦有以<span class="highlight">“气”</span>
             <span class="highlight">“心”</span>为太极的观点
