@@ -13,12 +13,30 @@
       }
 
       body {
+        position: relative;
+        min-height: 100vh;
+      }
+
+      body::after {
+        content: "";
+        background: url("https://img.tukuppt.com/ad_preview/01/15/74/61a814f1c1939.jpg!/fw/780")
+          center/cover no-repeat fixed;
+        opacity: 0.3; /* 可按需调整透明度 */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* 确保背景在内容下方 */
+      }
+
+      body {
         font-family: "Segoe UI", "微软雅黑", sans-serif;
         margin: 0;
         padding: 0;
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         color: var(--text-color);
       }
+
       header {
         background: rgba(255, 255, 255, 0.95);
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -183,7 +201,12 @@
 
     <main class="content">
       <div class="content-section">
-        <h2>太极拳概述</h2>
+        <h2>
+          <a
+            href="https://baike.baidu.com/item/%E5%A4%AA%E6%9E%81%E6%8B%B3/84009"
+            >太极拳概述</a
+          >
+        </h2>
         <img
           src="https://tse4-mm.cn.bing.net/th/id/OIP-C.26fVWob0z559SQdAFavwLgHaE8?rs=1&pid=ImgDetMain"
           alt="太极拳演示"
@@ -208,3 +231,4 @@
     </main>
   </body>
 </html>
+
