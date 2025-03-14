@@ -10,12 +10,28 @@
         --accent-color: #3498db;
         --text-color: #333;
       }
+      body {
+        position: relative;
+        min-height: 100vh;
+      }
+
+      body::after {
+        content: "";
+        background: url("https://img.tukuppt.com/ad_preview/01/15/74/61a814f1c1939.jpg!/fw/780")
+          center/cover no-repeat fixed;
+        opacity: 0.3; /* 可按需调整透明度 */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* 确保背景在内容下方 */
+      }
 
       body {
         font-family: "Segoe UI", "微软雅黑", sans-serif;
         margin: 0;
         padding: 0;
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         color: var(--text-color);
       }
 
@@ -115,28 +131,84 @@
       .hero-image:hover {
         transform: scale(1.02);
       }
+      .carousel-container {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        aspect-ratio: 16/9; /* 新增宽高比设置 */
+      }
+      carousel-slide {
+        position: relative;
+        height: 100%; /* 改为百分比 */
+      }
+
+      .carousel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        position: absolute;
+        opacity: 0;
+        transition: opacity 1s ease;
+      }
+
+      .carousel-slide img.active {
+        opacity: 1;
+      }
+
+      /* 导航按钮 */
+      .carousel-nav {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+      }
+
+      .carousel-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .carousel-dot.active {
+        background: var(--accent-color);
+      }
+
+      /* 箭头按钮 */
+      .carousel-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.3);
+        color: white;
+        padding: 15px;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: background 0.3s ease;
+      }
+
+      .prev {
+        left: 20px;
+      }
+      .next {
+        right: 20px;
+      }
+
+      .carousel-arrow:hover {
+        background: var(--accent-color);
+      }
 
       @media (max-width: 768px) {
-        header {
-          padding: 1rem;
-        }
-
-        h1 {
-          font-size: 1.5rem;
-        }
-
-        .nav-links {
-          flex-wrap: wrap;
-          gap: 1rem;
-          padding: 0 1rem;
-        }
-
-        .hero-image {
-          height: 300px;
-        }
-
-        .logo {
-          display: none;
+        .carousel-container {
+          aspect-ratio: 4/3; /* 移动端使用不同比例 */
         }
       }
     </style>
@@ -163,12 +235,88 @@
     </nav>
 
     <main class="content">
-      <img
-        src="https://ts1.tc.mm.bing.net/th/id/R-C.c4c24b64156f2487862c4b82aa94e65a?rik=3wU5w2Lw2vyEEw&riu=http%3a%2f%2fimg.mp.sohu.com%2fupload%2f20171217%2f55e79710fcde4627923147c0c884e7d6_th.JPG&ehk=o%2fELQqk%2bboUSin3yDC7zB7hSL0PXdHBEnKFBO37Kyl8%3d&risl=&pid=ImgRaw&r=0"
-        alt="太极表演"
-        class="hero-image"
-      />
+      <div class="carousel-container">
+        <div class="carousel-slide">
+          <!-- 当前图片 -->
+          <img
+            src="https://th.bing.com/th/id/R.318d6d2e8f5d163bf7195e429700b206?rik=QhentSIWS4D%2b0Q&riu=http%3a%2f%2fimg95.699pic.com%2fphoto%2f50179%2f6719.jpg_wh300.jpg&ehk=GHN%2b4gi7nzkkRoUxlYSRRPWppc%2buG3Ds7Uj76vAu24Q%3d&risl=&pid=ImgRaw&r=0"
+            alt="太极1"
+            class="active"
+          />
+          <!-- 预留图片位置（复制此img标签添加新图片） -->
+          <img
+            src="https://bpic.588ku.com/back_list_pic/22/11/13/01b1ac26c683f99ff1a84c8a246008e8.jpg"
+            alt="太极2"
+          />
+          <img
+            src="https://bpic.588ku.com/back_list_pic/21/06/16/490121436489320357f9a579f8d82b52.jpg"
+            alt="太极3"
+          />
+        </div>
+        <!-- 导航箭头 -->
+        <div class="carousel-arrow prev">❮</div>
+        <div class="carousel-arrow next">❯</div>
+        <!-- 导航点 -->
+        <div class="carousel-nav"></div>
+      </div>
       <video src=""></video>
     </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const slides = document.querySelectorAll(".carousel-slide img");
+        const dotsContainer = document.querySelector(".carousel-nav");
+        let currentIndex = 0;
+
+        // 创建导航点
+        slides.forEach((_, index) => {
+          const dot = document.createElement("div");
+          dot.className = `carousel-dot ${index === 0 ? "active" : ""}`;
+          dot.addEventListener("click", () => goToSlide(index));
+          dotsContainer.appendChild(dot);
+        });
+
+        // 箭头事件
+        document.querySelector(".prev").addEventListener("click", prevSlide);
+        document.querySelector(".next").addEventListener("click", nextSlide);
+
+        // 自动播放
+        let autoPlay = setInterval(nextSlide, 5000);
+
+        // 鼠标悬停暂停
+        document
+          .querySelector(".carousel-container")
+          .addEventListener("mouseenter", () => clearInterval(autoPlay));
+        document
+          .querySelector(".carousel-container")
+          .addEventListener(
+            "mouseleave",
+            () => (autoPlay = setInterval(nextSlide, 5000))
+          );
+
+        function updateSlide(index) {
+          slides.forEach((img) => img.classList.remove("active"));
+          slides[index].classList.add("active");
+
+          document
+            .querySelectorAll(".carousel-dot")
+            .forEach((dot, i) => dot.classList.toggle("active", i === index));
+        }
+
+        function nextSlide() {
+          currentIndex = (currentIndex + 1) % slides.length;
+          updateSlide(currentIndex);
+        }
+
+        function prevSlide() {
+          currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+          updateSlide(currentIndex);
+        }
+
+        function goToSlide(index) {
+          currentIndex = index;
+          updateSlide(currentIndex);
+        }
+      });
+    </script>
   </body>
 </html>
