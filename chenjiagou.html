@@ -12,10 +12,27 @@
       }
 
       body {
+        position: relative;
+        min-height: 100vh;
+      }
+
+      body::after {
+        content: "";
+        background: url("https://img.tukuppt.com/ad_preview/01/15/74/61a814f1c1939.jpg!/fw/780")
+          center/cover no-repeat fixed;
+        opacity: 0.3; /* 可按需调整透明度 */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* 确保背景在内容下方 */
+      }
+
+      body {
         font-family: "Segoe UI", "微软雅黑", sans-serif;
         margin: 0;
         padding: 0;
-        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
         color: var(--text-color);
       }
 
@@ -216,8 +233,11 @@
 
           <div class="description">
             <p>
-              <span class="highlight">陈家沟</span
-              >，又称陈沟，位于河南省焦作市温县赵堡镇，地处城东5公里处的清风岭中段。
+              <a
+                href="https://baike.baidu.com/item/%E9%99%88%E5%AE%B6%E6%B2%9F/1285749"
+                >陈家沟</a
+              >
+              ，又称陈沟，位于河南省焦作市温县赵堡镇，地处城东5公里处的清风岭中段。
             </p>
 
             <h3>文化旅游区</h3>
@@ -245,13 +265,32 @@
             <h3>太极大师</h3>
             <p>著名传承人包括：</p>
             <ul>
-              <li>陈小旺（多次全国太极拳冠军）</li>
-              <li>陈正雷（全国武术十大名师）</li>
-              <li>王西安、朱天才（"四大金钢"成员）</li>
+              <li>
+                <a
+                  href="https://baike.baidu.com/item/%E9%99%88%E5%B0%8F%E6%97%BA/1231796"
+                  >陈小旺</a
+                >（多次全国太极拳冠军）
+              </li>
+              <li>
+                <a
+                  href="https://baike.baidu.com/item/%E9%99%88%E6%AD%A3%E9%9B%B7?fromModule=lemma_search-box"
+                  >陈正雷</a
+                >（全国武术十大名师）
+              </li>
+              <li>
+                <a
+                  href="https://baike.baidu.com/item/%E7%8E%8B%E8%A5%BF%E5%AE%89/1231490"
+                  >王西安</a
+                >、<a
+                  href="https://baike.baidu.com/item/%E6%9C%B1%E5%A4%A9%E6%89%8D/1694111"
+                  >朱天才</a
+                >（"四大金钢"成员）
+              </li>
             </ul>
           </div>
         </div>
       </div>
     </main>
   </body>
+</html>
 </html>
